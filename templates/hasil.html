@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Daftar Hasil Perhitungan</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+      display:flex; justify-content:center; align-items:center;
+      min-height:100vh; margin:0; padding:40px;
+    }
+    .card {
+      background:#fff;
+      border-radius:16px;
+      box-shadow:0 4px 15px rgba(0,0,0,0.2);
+      padding:30px;
+      width:700px;
+    }
+    h2 { color:#0d47a1; text-align:center; margin-bottom:20px; }
+    table {
+      width:100%; border-collapse:collapse; margin-top:15px;
+    }
+    th, td {
+      border:1px solid #ccc;
+      padding:10px;
+      text-align:center;
+    }
+    th { background:#1976d2; color:white; }
+    tr:nth-child(even) { background:#f1f8ff; }
+    .btn {
+      display:inline-block;
+      margin-top:20px;
+      padding:10px 20px;
+      background:#1976d2;
+      color:white;
+      border-radius:8px;
+      text-decoration:none;
+      transition:background 0.3s;
+    }
+    .btn:hover { background:#0d47a1; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Daftar Hasil Perhitungan Volume</h2>
+
+    {% if riwayat %}
+    <table>
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Panjang</th>
+          <th>Lebar</th>
+          <th>Tinggi</th>
+          <th>Volume</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in riwayat %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td>{{ item.panjang }}</td>
+          <td>{{ item.lebar }}</td>
+          <td>{{ item.tinggi }}</td>
+          <td>{{ "%.2f"|format(item.volume) }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+      <p style="text-align:center;">Belum ada data perhitungan.</p>
+    {% endif %}
+
+    <div style="text-align:center;">
+      <a href="{{ url_for('hitung') }}" class="btn">Tambah Data</a>
+      <a href="{{ url_for('index') }}" class="btn" style="background:#388e3c;">Beranda</a>
+    </div>
+  </div>
+</body>
+</html>
